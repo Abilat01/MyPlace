@@ -9,9 +9,9 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let restaurantNames = ["Бар пробка", "Васаби", "Додо пицца", "Евразия", "Жемчужина",
-                           "Камелот", "Карл Швабе", "Много мяса", "Пивная кружка",
-                           "СушиWay", "Теремок", "Beerloga", "SPB", "TOKIO-SITI"]
+
+    
+    let places = Place.getPlaces()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,30 +22,27 @@ class MainViewController: UITableViewController {
 
     //метод отвечающий за колличество ячеек, у меня это зависит от массива
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantNames.count
+        return places.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        cell.textLabel?.text = restaurantNames[indexPath.row]
-        cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
-        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 2
-        cell.imageView?.clipsToBounds = true
+        
+        cell.nameLabel.text = places[indexPath.row].name
+        cell.locationLabel.text = places[indexPath.row].location
+        cell.typeLabel.text = places[indexPath.row].type
+        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
+        
+        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+        cell.imageOfPlace.clipsToBounds = true
+        
+        
 
 
         return cell
     }
-    
-    // MARK: - Table view delegate
-    
-    //высота строки
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
-    }
-    
-
     
     /*
     // MARK: - Navigation
