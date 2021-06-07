@@ -9,9 +9,6 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController, UINavigationControllerDelegate {
     
-    
-    
-    var newPlace = Place()
     var imageIsChanged = false
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -68,6 +65,7 @@ class NewPlaceViewController: UITableViewController, UINavigationControllerDeleg
 
     func saveNewPlace() {
         
+        
         var image: UIImage?
         
         if imageIsChanged {
@@ -76,11 +74,15 @@ class NewPlaceViewController: UITableViewController, UINavigationControllerDeleg
             image = #imageLiteral(resourceName: "nillNewPlace")
         }
         
-//        newPlace = Place(name: placeName.text!,
-//                         location: placeLocation.text,
-//                         type: placeType.text,
-//                         image: image,
-//                         restaurantImage: nil)
+
+        let imageData = image?.pngData()
+        
+        let newPlace = Place(name: placeName.text!,
+                             location: placeLocation.text!,
+                             type: placeType.text!,
+                             imageData: imageData)
+        
+        StorageManager.saveObject(newPlace)
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
