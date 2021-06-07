@@ -9,7 +9,10 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController, UINavigationControllerDelegate {
     
-    var newPlace: Place?
+    
+    
+    var newPlace = Place()
+    var imageIsChanged = false
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
@@ -19,7 +22,7 @@ class NewPlaceViewController: UITableViewController, UINavigationControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.tableFooterView = UIView()
         
         saveButton.isEnabled = false
@@ -64,11 +67,20 @@ class NewPlaceViewController: UITableViewController, UINavigationControllerDeleg
     }
 
     func saveNewPlace() {
-        newPlace = Place(name: placeName.text!,
-                         location: placeLocation.text,
-                         type: placeType.text,
-                         image: placeImage.image,
-                         restaurantImage: nil)
+        
+        var image: UIImage?
+        
+        if imageIsChanged {
+            image = placeImage.image
+        } else {
+            image = #imageLiteral(resourceName: "nillNewPlace")
+        }
+        
+//        newPlace = Place(name: placeName.text!,
+//                         location: placeLocation.text,
+//                         type: placeType.text,
+//                         image: image,
+//                         restaurantImage: nil)
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
@@ -117,6 +129,9 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate {
         placeImage.image = info[.editedImage] as? UIImage
         placeImage.contentMode = .scaleAspectFill
         placeImage.clipsToBounds = true
+        
+        imageIsChanged = true
+        
         dismiss(animated: true, completion: nil)
         
     }

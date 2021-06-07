@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Beerloga.jpg",
+      "filename" : "nillNewPlace@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Beerloga@2x.jpg",
+      "filename" : "nillNewPlace@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Beerloga@3x.jpg",
+      "filename" : "nillNewPlace@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
